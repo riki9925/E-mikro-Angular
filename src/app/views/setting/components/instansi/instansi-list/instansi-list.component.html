@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row col-md-12">
+          <button (click)="create()" class="btn btn-success">Buat Instansi Baru</button>
+        </div>
+      </div>
+      <div class="card-block">
+        <clr-datagrid>
+          <clr-dg-column [clrDgField]="'KI'">KODE INSTANSI</clr-dg-column>
+          <clr-dg-column [clrDgField]="'NAMA_INSTANSI'">NAMA INSTANSI</clr-dg-column>
+          <clr-dg-column [clrDgField]="'NAMA_BENDAHARA'">NAMA BENDAHARA</clr-dg-column>
+          <clr-dg-column>Action</clr-dg-column>
+
+          <clr-dg-row *clrDgItems="let item of instansi">
+            <clr-dg-cell>{{item.KI}}</clr-dg-cell>
+            <clr-dg-cell>{{item.NAMA_INSTANSI}}</clr-dg-cell>
+            <clr-dg-cell>{{item.NAMA_BENDAHARA}}</clr-dg-cell>
+            <clr-dg-cell>
+              <a (click)="edit(item)" class="btn btn-primary btn-sm float-md-right">Edit</a>
+              <a (click)="delete(item)" class="btn btn-danger btn-sm float-md-right">Delete</a>
+            </clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} instansi
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+      </div>
+      <div class="card-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

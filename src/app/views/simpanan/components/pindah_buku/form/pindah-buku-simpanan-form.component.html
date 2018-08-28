@@ -1,0 +1,142 @@
+<app-anggota-modal [show]="show" (onCancle)="onCancle(item)" (onSelect)="fromModal($event)" #cariAnggotaModal>
+</app-anggota-modal>
+
+
+<form [formGroup]="form" class="form-block">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Rekening Asal
+        </div>
+        <div class="card-block">
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>No. anggota</label>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" readonly formControlName="CIB1" type="text" placeholder="Cari...">
+            </div>
+            <div class="col-md">
+              <button (click)="cariAnggota('CIB1')" class="btn btn-icon float-sm-right">
+                <clr-icon shape="search"></clr-icon>
+              </button>
+            </div>
+          </div>
+          <div class="card" *ngIf="anggota1">
+            <div class="card-header">
+              Informasi Anggota
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-md-12">
+                  <informasi-anggota [anggota]="anggota1"></informasi-anggota>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>No. Simpanan</label>
+                    <div class="select">
+                      <select formControlName="NOSIMP1">
+                        <option>Pilih No Simpanan</option>
+                        <option *ngFor="let item of master1" [ngValue]="item.NOSIMP">{{ item.NOSIMP + " - "+ item.KETERANGAN }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row" *ngIf="selectedMaster1">
+                <div class="col-md-12">
+                  <informasi-simpanan [simpanan]="selectedMaster1"></informasi-simpanan>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Rekening Tujuan
+        </div>
+        <div class="card-block">
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>No. anggota</label>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" readonly formControlName="CIB2" type="text" placeholder="Cari...">
+            </div>
+            <div class="col-md">
+              <button (click)="cariAnggota('CIB2')" class="btn btn-icon float-sm-right">
+                <clr-icon shape="search"></clr-icon>
+              </button>
+            </div>
+          </div>
+          <div class="card" *ngIf="anggota2">
+            <div class="card-header">
+              Informasi Anggota
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-md-12">
+                  <informasi-anggota [anggota]="anggota2"></informasi-anggota>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>No. Simpanan</label>
+                    <div class="select">
+                      <select formControlName="NOSIMP2">
+                        <option>Pilih No Simpanan</option>
+                        <option *ngFor="let item of master2" [ngValue]="item.NOSIMP">{{ item.NOSIMP + " - "+ item.KETERANGAN }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row" *ngIf="selectedMaster2">
+                <div class="col-md-12">
+                  <informasi-simpanan [simpanan]="selectedMaster2"></informasi-simpanan>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="anggota1 && anggota2">
+      <div class="card">
+        <div class="card-block">
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label class="required">Nominal</label>
+              <input class="form-control input-number" width="100%" formControlName="NOMINAL" type="text" currencyFormatter>
+            </div>
+            <div class="col-md-6">
+              <label>Keterangan</label>
+              <textarea formControlName="KETERANGAN" placeholder="Keterangan Transaksi"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <button [disabled]="!form.valid" class="btn btn-primary float-md-right">Posting</button>
+              <button class="btn float-md-right">Baru</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

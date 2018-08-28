@@ -1,0 +1,31 @@
+<app-anggota-master-form
+  *ngIf="selectedAnggota$ | async"
+  [instansi]="instansi$ | async"
+  [hub_keluarga]="hub_keluarga$ | async"
+  [agama]="agama$ | async"
+  [pendidikan]="pendidikan$ | async"
+  [pekerjaan]="pekerjaan$ | async"
+  [identitas]="identitas$ | async"
+  [jabatan]="jabatan$ | async"
+  [golongan]="golongan$ | async"
+  [anggota]="selectedAnggota$ | async"
+  [loading]="loading$ | async"
+  (save)="save($event)"
+  (batal)="batal()"
+  (update)="update()"
+>
+
+</app-anggota-master-form>
+<app-anggota-master-list
+  *ngIf="!(selectedAnggota$ | async)"
+  [anggota]="anggota$ | async"
+  [loading]="loading$ | async"
+  (create)="create($event)"
+  (edit)="edit($event)"
+  (delete)="delete($event)"
+  (approv)="approve($event)"
+  [instansi]="instansi$ | async"
+  [golongan]="golongan$ | async"
+
+>
+</app-anggota-master-list>

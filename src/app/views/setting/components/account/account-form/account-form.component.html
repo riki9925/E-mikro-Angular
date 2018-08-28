@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div *ngIf="account.CIF">
+        <h2>Update Account</h2>
+        </div>
+        <div *ngIf="!account.CIF">
+          <h2>Create Account</h2>
+        </div>
+      </div>
+      <div class="card-block">
+        <form [formGroup]="accountForm" class="form-block" novalidate>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label>Bukubesar</label>
+              <div class="select form-control">
+                <select formControlName="bukubesar" (change)="onChangeBukubesar()">
+                  <option value="0" disabled selected>Select Kelompok</option>
+                  <option *ngFor="let item of bukubesar" [ngValue]="item"> {{item.BUKUBESAR}}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('bukubesar')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-3">
+                <label>Bukubesar</label>
+                <input class="form-control" formControlName="vbukubesar" placeholder="No Bukubesar" name="name" type="text">
+                <div *ngIf="isRequired('vbukubesar')" class="label label-danger">
+                  Required
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="required">Urut</label>
+                <input class="form-control" formControlName="urut" placeholder="No Urut Account" name="name" type="text">
+                <div *ngIf="isRequired('urut')" class="label label-danger">
+                  Required
+                </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="required">Nama</label>
+            <input class="form-control" formControlName="KETERANGAN" placeholder="Nama Account" name="username" type="text"/>
+            <div *ngIf="isRequired('KETERANGAN')" class="label label-danger">
+              Required
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row col-md-12">
+          <button *ngIf="!account.CIF" (click)="simpan()" class="btn btn-primary float-sm-right">Simpan</button>
+          <button *ngIf="account.CIF" (click)="update()" class="btn btn-primary float-sm-right">Update</button>
+          <button (click)="batal()" class="btn float-sm-right">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

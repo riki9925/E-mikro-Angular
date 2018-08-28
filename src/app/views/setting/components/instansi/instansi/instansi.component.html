@@ -1,0 +1,18 @@
+<app-instansi-form
+  *ngIf="selectedInstansi$ | async"
+  [loading]="loading$ | async"
+  [instansi]="selectedInstansi$ | async"
+  (save)="save($event)"
+  (update)="update($event)"
+  (batal)="batal()"
+>
+</app-instansi-form>
+<app-instansi-list
+  *ngIf="!(selectedInstansi$ | async)"
+  [loading]="loading$ | async"
+  [instansi]="instansi$ | async"
+  (create)="create()"
+  (edit)="edit($event)"
+  (delete)="delete($event)"
+>
+</app-instansi-list>

@@ -1,0 +1,120 @@
+<div class="row" *ngIf="master && selectedAnggota">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Proses Setor Simpanan Pokok
+      </div>
+      <div class="card-block">
+        <form [formGroup]="form" class="form-block">
+          <div class="row">
+            <div class="col-md">
+              <div class="card">
+                <div class="card-block">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <informasi-anggota [anggota]="selectedAnggota"></informasi-anggota>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-block">
+                  <div class="form-group">
+                    <label>Jenis Rekening</label>
+                    <div class="select form-control">
+                      <select (change)="onChangeJenisRekening($event)">
+                        <option value="" selected>Pilih Jenis Rekening</option>
+                        <option value="1101">KAS</option>
+                        <option value="1102">BANK</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Rekening Transaksi</label>
+                    <div class="select form-control">
+                      <select formControlName="ACC" [disabled]="!acc">
+                        <option value="" selected>Pilih Rekening Transaksi</option>
+                        <option *ngFor="let item of acc" [value]="item.ACC">{{ item.KETERANGAN }}</option>
+                      </select>
+                      <div *ngIf="isRequired('ACC')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="card">
+                <div class="card-block">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <informasi-simpanan [simpanan]="master"></informasi-simpanan>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" >
+                <div class="card-block">
+                  <div class="form-group">
+                    <label>Nominal Transaksi</label>
+                  </div>
+                  <div class="form-group">
+                    <input formControlName="NOMINAL" class="form-control-lg" style="text-align: right;"
+                           currencyFormatter type="text" name="" value="">
+                    <div *ngIf="isRequired('NOMINAL')" class="label label-danger">
+                      Required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Transaksi</label>
+                    <textarea formControlName="KETERANGAN" class="form-control">
+                    </textarea>
+                    <div *ngIf="isRequired('KETERANGAN')" class="label label-danger">
+                      Required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Berita Transaksi</label>
+                    <textarea formControlName="BERITA" class="form-control">
+                    </textarea>
+                    <div *ngIf="isRequired('BERITA')" class="label label-danger">
+                      Required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <!--<button [disabled]="!form.valid" (click)="posting()" class="btn btn-primary float-md-right">Posting</button>-->
+            <button (click)="baru()" class="btn btn-primary float-md-right">Baru</button>
+            <button
+              class="btn btn-primary float-md-right"
+              [disabled]="!form.valid"
+              [swal]="confirm_swal">
+              Posting
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #confirm_swal
+  title="Konfirmasi!"
+  text="Apa Anda Yakin untuk memposting transaksi?"
+  type="question"
+  showLoaderOnConfirm="true"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="proses_posting()">
+</swal>
+<list-anggota *ngIf="!master && !selectedAnggota" [prop]="'CIB'" (onSelect)="fromModal($event)"></list-anggota>
+

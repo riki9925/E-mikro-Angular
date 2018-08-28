@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-block">
+              <div class="form-group row">
+                <div class="col-md">
+                  <label>Status</label>
+                  <div class="select">
+                    <select [(ngModel)]="status" [ngModelOptions]="{standalone: true}" (click)="refresh()">
+                      <option value="SEMUA" selected>SEMUA</option>
+                      <option value="1" selected>TIDAK AKTIF</option>
+                      <option value="2" selected>AKTIF</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <label>Instansi</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedInstansi" [ngModelOptions]="{standalone: true}" (click)="refresh()"
+                            class="ui search dropdown">
+                      <option value="SEMUA" selected>SEMUA</option>
+                      <option *ngFor="let item of instansi" [ngValue]="item">{{item.NAMA_INSTANSI}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <label>Golongan</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedGolongan" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="refresh()" class="ui search dropdown">
+                      <option value="SEMUA" selected>SEMUA</option>
+                      <option *ngFor="let item of golongan" [ngValue]="item"> {{item.GOLONGAN}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <button type="button" (click)="create()" class="btn btn-primary">Registrasi Anggota Baru</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <clr-datagrid>
+          <clr-dg-column [clrDgField]="'CIB'">CIB</clr-dg-column>
+          <clr-dg-column [clrDgField]="'NOKARTU'">NOKARTU</clr-dg-column>
+          <clr-dg-column [clrDgField]="'NIP'">NIP</clr-dg-column>
+          <clr-dg-column [clrDgField]="'NAMA'">NAMA</clr-dg-column>
+          <clr-dg-column [clrDgField]="'KI'">KI</clr-dg-column>
+          <clr-dg-column>Action</clr-dg-column>
+
+          <clr-dg-row *clrDgItems="let item of anggota">
+            <clr-dg-cell>{{item.CIB}}</clr-dg-cell>
+            <clr-dg-cell>{{item.NOKARTU}}</clr-dg-cell>
+            <clr-dg-cell>{{item.NIP}}</clr-dg-cell>
+            <clr-dg-cell>{{item.NAMA}}</clr-dg-cell>
+            <clr-dg-cell>{{item.KI}}</clr-dg-cell>
+            <clr-dg-cell>
+              <div *ngIf="item.ST !== '1';then editable else not_editable">
+              </div>
+              <ng-template #editable>
+                <td>
+                  <a (click)="edit(item)" class="btn btn-primary btn-sm">Edit</a>
+                  <a (click)="delete(item)" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+              </ng-template>
+              <ng-template #not_editable>
+                <td>
+                  <a (click)="approv(item)" class="btn btn-success btn-sm">Approve</a>
+                </td>
+              </ng-template>
+            </clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} Anggota
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+      </div>
+      <div class="card-footer">
+      </div>
+    </div>
+  </div>
+</div>

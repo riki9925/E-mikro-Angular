@@ -1,0 +1,278 @@
+<app-account-modal [input]="input" (onCancle)="modal_close($event)" [show]="show" (onSelect)="fromModal($event)">
+</app-account-modal>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header" *ngIf="jenis && jenis.CIF">
+        Update Jenis Simpanan
+      </div>
+      <div class="card-header" *ngIf="jenis && !jenis.CIF">
+        Buat Jenis Simpanan
+      </div>
+      <div class="card-block">
+        <form [formGroup]="simpananSetting" class="compact" novalidate>
+          <div class="form-group row">
+            <div class="col-md-2">
+              <label>Jenis Simpanan</label>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-10">
+                  <input class="form-control" (change)="change($event)" readonly type="text" formControlName="ACC"
+                         placeholder="Cari...">
+                  <div *ngIf="isRequired('ACC')" class="label label-danger">
+                    Requeired
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button (click)="cariAccount('ACC')" type="button" class="btn btn-icon">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <input class="form-control" formControlName="ACCKETERANGAN" disabled placeholder="No Bukubesar"
+                     name="name" type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md">
+              <label>Min. Setoran awal</label>
+              <input class="form-control" formControlName="SETAWAL" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('SETAWAL')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Min. Setoran</label>
+              <input class="form-control" formControlName="SETMIN" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('SETMIN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Minimal Saldo</label>
+              <input class="form-control" formControlName="SALMIN" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('SALMIN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md">
+              <label>Min. Penarikan</label>
+              <input class="form-control" formControlName="MINTARIK" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('MINTARIK')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md"><label>Max. Penarikan</label>
+              <input class="form-control" formControlName="MAXTARIK" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('MAXTARIK')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md"></div>
+          </div>
+
+          <hr>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label>Bunda / Jasa</label>
+              <input class="form-control" formControlName="BGA" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('BGA')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <label>Rek Beban Bunga</label>
+                    </div>
+                    <div class="col-md-12">
+                      <input class="form-control" readonly formControlName="ACCBGA" type="text" placeholder="Cari...">
+                      <div *ngIf="isRequired('ACCBGA')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button (click)="cariAccount('ACCBGA')" type="button" class="btn btn-icon">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+                <div class="col-md">
+                  <input class="form-control" formControlName="ACCBGAKETERANGAN" disabled type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label>Biaya Pajak terhadap bunga</label>
+              <input class="form-control" formControlName="PJK" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('PJK')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <label>Rek Bunga Pajak terhadap Bunga</label>
+                    </div>
+                    <div class="col-md-12">
+                      <input class="form-control" readonly formControlName="ACCBGA" type="text" placeholder="Cari...">
+                      <div *ngIf="isRequired('ACCBGA')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button (click)="cariAccount('ACCBGA')" type="button" class="btn btn-icon">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+                <div class="col-md">
+                  <input class="form-control" formControlName="ACCBGAKETERANGAN" disabled type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label>Biaya penutupan rekening</label>
+              <input class="form-control" formControlName="POT" currencyFormatter style="text-align: right;" type="text"
+                     placeholder="Cari...">
+              <div *ngIf="isRequired('POT')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <label>Rek Biaya penutupan rekening</label>
+                    </div>
+                    <div class="col-md-12">
+                      <input class="form-control" readonly formControlName="ACCPOT" type="text" placeholder="Cari...">
+                      <div *ngIf="isRequired('ACCPOT')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button (click)="cariAccount('ACCPOT')" type="button" class="btn btn-icon">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+                <div class="col-md">
+                  <input class="form-control" formControlName="ACCPOTKETERANGAN" disabled type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label>Biaya Administrasi</label>
+              <input class="form-control" formControlName="ADM" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('ADM')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <label>Rek Biaya Administrasi</label>
+                    </div>
+                    <div class="col-md-12">
+                      <input class="form-control" readonly formControlName="ACCADM" type="text" placeholder="Cari...">
+                      <div *ngIf="isRequired('ACCADM')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button (click)="cariAccount('ACCADM')" type="button" class="btn btn-icon">
+                    <clr-icon shape="search"></clr-icon>
+                  </button>
+                </div>
+                <div class="col-md">
+                  <input class="form-control" formControlName="ACCADMKETERANGAN" disabled type="text" name="" value="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md">
+              <label>Status</label>
+              <div class="select form-control">
+                <select formControlName="KST" class="ui dropdown">
+                  <option value="0">BUKAN SIMPANAN POKOK</option>
+                  <option value="1">SIMPANAN POKOK</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('KST')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Nominal setoran Rutin</label>
+              <input class="form-control" formControlName="SETORAN" currencyFormatter style="text-align: right;"
+                     placeholder="Nama Account" name="username" type="text"/>
+              <div *ngIf="isRequired('SETORAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Perhitungan Bunga</label>
+              <div class="select form-control">
+                <select formControlName="PB" class="ui dropdown">
+                  <option value="0">TANPA BUGA / JASA</option>
+                  <option value="1">DENGAN BUNGA</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('PB')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md">
+            <button (click)="simpan()" *ngIf="jenis && !jenis.CIF" [disabled]="!simpananSetting.valid" class="btn btn-success float-md-right">
+              Simpan
+            </button>
+            <button (click)="update()" *ngIf="jenis && jenis.CIF" [disabled]="!simpananSetting.valid" class="btn btn-success float-md-right">
+              Update
+            </button>
+            <button class="btn btn-primary float-md-right">Distribusi Ke Anggota</button>
+            <button (click)="batal()" class="btn float-md-right">Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

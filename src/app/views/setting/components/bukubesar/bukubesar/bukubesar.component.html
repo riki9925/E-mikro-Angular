@@ -1,0 +1,27 @@
+<app-bukubesar-form
+  *ngIf="selectedBukubesar$ | async"
+  [selectedJenis]="selectedJenis$ | async"
+  [selectedKelompok]="selectedKelompok$ | async"
+  [jenis]="jenis$ | async"
+  [kelompok]="kelompok$ | async"
+  [bukubesar]="selectedBukubesar$ | async"
+  [loading]="loading$ | async"
+  (batal)="batal()"
+  (save)="save($event)"
+  (update)="update($event)"
+  (jenisChange)="emitJenisChange($event)"
+  (kelompokChange)="emitKelompokChange($event)">
+</app-bukubesar-form>
+
+<app-bukubesar-list
+  *ngIf="!(selectedBukubesar$ | async)"
+  [jenis]="jenis$ | async"
+  [kelompok]="kelompok$ | async"
+  [bukubesar]="bukubesar$ | async"
+  [loading]="loading$ | async"
+  (jenisChange)="emitJenisChange($event)"
+  (onEdit)="emitOnEdit($event)"
+  (onDelete)="emitOnDelete($event)"
+  (onCreate)="emitOnCreate($event)"
+  (kelompokChange)="emitKelompokChange($event)">
+</app-bukubesar-list>

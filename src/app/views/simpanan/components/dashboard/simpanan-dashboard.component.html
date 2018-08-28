@@ -1,0 +1,22 @@
+<clr-main-container>
+  <app-header></app-header>
+  <div class="content-container">
+    <div class="content-area">
+      <div class="row">
+        <div *ngFor="let item of items" class="col-xs-12 col-sm-12 col-md-4">
+          <a [routerLink]="[item.path]" routerLinkActive="active" class="card clickable">
+            <div class="card-header">
+              {{ item.title }}
+            </div>
+            <div class="card-block">
+              <p class="card-text">
+                {{item.description}}
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</clr-main-container>
+

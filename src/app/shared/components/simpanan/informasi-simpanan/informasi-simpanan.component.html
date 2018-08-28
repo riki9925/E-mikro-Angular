@@ -1,0 +1,54 @@
+<table class="table-noborder" cellpadding="5" width="100%">
+  <tr>
+    <td style="text-align: center;font-weight: bold" colspan="4">
+      Informasi Simpanan
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <hr>
+    </td>
+  </tr>
+  <tr *ngIf="jenis">
+    <td>No. Simpanan</td>
+    <td colspan="3" style="text-align: right;font-weight: bold;font-size: 1.5em">{{ simpanan.NOSIMP}}</td>
+  </tr>
+  <tr *ngIf="jenis">
+    <td>Jenis</td>
+    <td style="text-align: right">{{ jenis.ACC}}</td>
+    <td colspan="2">{{ jenis.KETERANGAN}}</td>
+  </tr>
+  <tr *ngIf="jenis">
+    <td>Min. Tarik</td>
+    <td style="text-align: right">{{ jenis.MINTARIK | Currency}}</td>
+    <td>Max Tarik</td>
+    <td style="text-align: right">{{ jenis.MAXTARIK | Currency}}</td>
+  </tr>
+  <tr *ngIf="jenis">
+    <td></td>
+    <td></td>
+    <td>Saldo Minimal</td>
+    <td style="text-align: right">{{ jenis.SALMIN | Currency}}</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;font-weight: bold" colspan="4">
+      Informasi Saldo
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <hr>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Saldo</td>
+    <td style="text-align: right">{{ simpanan.SALDO | Currency}}</td>
+    <td>Saldo Terblokir</td>
+    <td style="text-align: right">{{ simpanan.BLOKIR | Currency}}</td>
+  </tr>
+  <tr>
+    <td colspan="3">Saldo Yang dapat di transaksikan</td>
+    <td style="text-align: right">{{ (simpanan.SALDO - simpanan.BLOKIR) | Currency }}</td>
+  </tr>
+</table>

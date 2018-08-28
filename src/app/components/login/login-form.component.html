@@ -1,0 +1,19 @@
+<div class="login-wrapper">
+  <form (ngSubmit)="onSubmit(auth)" [formGroup]="auth" class="login" novalidate>
+    <label class="title">
+      <h3 class="welcome">Welcome to</h3>
+      e-Mikro
+      <h5 class="hint">Masukan Username dan password anda:</h5>
+    </label>
+    <div class="login-group">
+      <input class="username" formControlName="username" type="text" id="login_username" placeholder="Username">
+      <input class="password" formControlName="password" type="password" id="login_password" placeholder="Password">
+      <div *ngIf="!!(error$ | async)" class="error active">
+        <p>{{error$ | async}}</p>
+      </div>
+      <button type="submit" [disabled]="auth.invalid || (loading$ | async)" [clrLoading]="(loading$ | async)"
+              class="btn btn-primary">Login
+      </button>
+    </div>
+  </form>
+</div>

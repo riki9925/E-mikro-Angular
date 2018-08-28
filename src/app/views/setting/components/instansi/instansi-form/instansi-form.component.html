@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div *ngIf="instansi.KI">
+          <h4>Update Instansi</h4>
+        </div>
+        <div *ngIf="!instansi.KI">
+          <h4>Create Instansi</h4>
+        </div>
+      </div>
+      <div class="card-block">
+        <form [formGroup]="instansiForm" novalidate>
+          <section class="form-block">
+            <div class="form-group">
+              <label class="required">Nama</label>
+              <input formControlName="NAMA_INSTANSI" placeholder="Nama instansi" name="username" type="text"/>
+              <div *ngIf="isRequired('NAMA_INSTANSI')" class="label label-danger">
+                Masukan nama instansi.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="required">Alamat</label>
+              <textarea formControlName="ALAMAT" placeholder="Nama instansi" name="username" type="text"></textarea>
+              <div *ngIf="isRequired('ALAMAT')" class="label label-danger">
+                Masukan alamat instansi.
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="required">Telepon</label>
+                  <input formControlName="TELEPON" placeholder="No telefon" name="name" type="text">
+                  <div *ngIf="isRequired('TELEPON')" class="label label-danger">
+                    Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="required">Handphone</label>
+                  <input formControlName="HANDPHONE" placeholder="No handphone" name="name" type="text">
+                  <div *ngIf="isRequired('HANDPHONE')" class="label label-danger">
+                    Required
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="required">Nama Bendahara</label>
+                  <input formControlName="NAMA_BENDAHARA" placeholder="Nama Bendahara" name="name" type="text">
+                  <div *ngIf="isRequired('NAMA_BENDAHARA')" class="label label-danger">
+                    Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="required">Telepon Bendahara</label>
+                  <input formControlName="TELEPON_BENDAHARA" placeholder="Telepon Bendahara" name="name" type="text">
+                  <div *ngIf="isRequired('TELEPON_BENDAHARA')" class="label label-danger">
+                    Required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-4 offset-md-8">
+            <div *ngIf="!instansi.KI" (click)="simpan()" class="btn btn-primary float-md-right">Simpan</div>
+            <div *ngIf="instansi.KI" (click)="update()" class="btn btn-primary float-md-right">Update</div>
+            <div (click)="batal()" class="btn btn-danger float-md-right">Batal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

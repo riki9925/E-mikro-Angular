@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-block">
+              <div class="form-group row">
+                <div class="col-md">
+                  <label>Unit Bisnis</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedUnitBisnis" [ngModelOptions]="{standalone: true}"
+                            (click)="onChangeUnitBisnis()">
+                      <option value="0" disabled selected>Select Jenis</option>
+                      <option *ngFor="let item of unit" [ngValue]="item">{{ item.KU + " - " + item.NAMA_UNIT}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <label>Jenis Account</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedJenis" [ngModelOptions]="{standalone: true}" (click)="onChangeJenis()">
+                      <option value="0" disabled selected>Select Jenis</option>
+                      <option *ngFor="let item of jenis" [ngValue]="item">{{item.JENIS}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <label>Kelompok Account</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedKelompok" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="onChangeKelompok()" class="ui search dropdown">
+                      <option value="0" disabled selected>Select Kelompok</option>
+                      <option *ngFor="let item of kelompok" [ngValue]="item"> {{item.KELOMPOK}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <label>Bukubesar</label>
+                  <div class="select">
+                    <select [(ngModel)]="selectedBukubesar" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="onChangeBukubesar()" placeholder="Select Bukubesar"
+                            class="ui search dropdown">
+                      <option value="0" disabled selected>Select Bukubesar</option>
+                      <option *ngFor="let item of bukubesar" [ngValue]="item"> {{item.BUKUBESAR}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-12">
+            <button (click)="createNewAccount()" [disabled]="selectedBukubesar === '0'" type="button"
+                    class="btn btn-primary float-md-right">Buat Account Baru
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-block">
+        <clr-datagrid>
+          <clr-dg-column [clrDgField]="'ACC'">ACC</clr-dg-column>
+          <clr-dg-column [clrDgField]="'KETERANGAN'">Keterangan</clr-dg-column>
+          <clr-dg-column [clrDgField]="'GOLONGAN'">Golongan</clr-dg-column>
+          <clr-dg-column>Action</clr-dg-column>
+
+          <clr-dg-row *clrDgItems="let item of account">
+            <clr-dg-cell>{{item.ACC}}</clr-dg-cell>
+            <clr-dg-cell>{{item.KETERANGAN}}</clr-dg-cell>
+            <clr-dg-cell>{{item.GOLONGAN}}</clr-dg-cell>
+            <clr-dg-cell>
+              <div *ngIf="item.GOLONGAN !== 'SYSTEM';then editable else not_editable">
+
+              </div>
+              <ng-template #editable>
+                <td>
+                  <a (click)="edit(item)" class="btn btn-primary btn-sm">Edit</a>
+                  <a (click)="delete(item)" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+
+              </ng-template>
+              <ng-template #not_editable>
+                <td></td>
+              </ng-template>
+            </clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} Unit
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+</div>

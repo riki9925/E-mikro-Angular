@@ -1,0 +1,155 @@
+<list-anggota *ngIf="!selectedAnggota" [prop]="'CIB'" (onSelect)="fromModal($event)"></list-anggota>
+<div class="row" *ngIf="selectedAnggota">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Proses Penarikan Simpanan
+      </div>
+      <div class="card-block">
+        <form [formGroup]="form" class="form-block" novalidate>
+          <div class="card">
+            <div class="card-block" >
+              <div class="row">
+                <div class="col-md-12">
+                  <informasi-anggota [anggota]="selectedAnggota"></informasi-anggota>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <table class="ui striped table">
+                <thead>
+                <tr>
+                  <th rowspan="2" class="aligned">No. Simpanan</th>
+                  <th rowspan="2" class="aligned">Kode Rekening</th>
+                  <th rowspan="2" class="aligned">Jenis Simpanan</th>
+                  <th colspan="3" class="aligned">Saldo Simpanan</th>
+                  <th rowspan="2" class="center aligned">Nominal</th>
+                </tr>
+                <tr>
+                  <th class="aligned">Saldo</th>
+                  <th class="aligned">Blokir</th>
+                  <th class="aligned">Saldo Transaksi</th>
+                </tr>
+                </thead>
+                <tbody formArrayName="TRANSAKSI">
+                <tr [formGroupName]="i" *ngFor="let item of TRANSAKSI.controls; let i = index;">
+
+                  <td class="left">{{ form.get('TRANSAKSI').controls[i].get('NOSIMP').value }}</td>
+                  <td class="left">{{ form.get('TRANSAKSI').controls[i].get('ACC').value }}</td>
+                  <td class="left">{{ form.get('TRANSAKSI').controls[i].get('KETERANGAN').value }}</td>
+                  <td style="text-align: right">{{ form.get('TRANSAKSI').controls[i].get('SALDO').value | Currency }}</td>
+                  <td style="text-align: right">{{ form.get('TRANSAKSI').controls[i].get('BLOKIR').value | Currency }}</td>
+                  <td style="text-align: right">{{ form.get('TRANSAKSI').controls[i].get('SALDO').value | Currency }}</td>
+                  <td class="right">
+                    <input currencyFormatter style="text-align:right;" formControlName="NOMINAL" type="text"/>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Total</td>
+                  <td align="right">{{ total | Currency }}</td>
+                </tr>
+                </tfoot>
+
+
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="card">
+                <div class="card-block">
+                  <div class="form-group">
+                    <label>Jenis Rekening</label>
+                    <div class="select form-control">
+                      <select (change)="onChangeJenisRekening($event)">
+                        <option value="" selected>Pilih Jenis Rekening</option>
+                        <option value="1101">KAS</option>
+                        <option value="1102">BANK</option>
+                      </select>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Rekening Transaksi</label>
+                    <div class="select form-control">
+                      <select formControlName="ACC" [disabled]="!acc">
+                        <option value="" selected>Pilih Rekening Transaksi</option>
+                        <option *ngFor="let item of acc" [value]="item.ACC">{{ item.ACC + " - "+ item.KETERANGAN }}</option>
+                      </select>
+                      <div *ngIf="isRequired('ACC')" class="label label-danger">
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="card">
+                <div class="card-block">
+                  <div class="form-group">
+                    <label>Nominal Transaksi</label>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4 style="margin: 1em;font-weight: bold;" class="float-sm-right">{{ total | Currency }}</h4>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Keterangan Transaksi</label>
+                    <textarea formControlName="KETERANGAN" class="form-control">
+                    </textarea>
+                    <div *ngIf="isRequired('KETERANGAN')" class="label label-danger">
+                      Required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Berita Transaksi</label>
+                    <textarea formControlName="BERITA" class="form-control">
+                    </textarea>
+                    <div *ngIf="isRequired('BERITA')" class="label label-danger">
+                      Required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button [disabled]="!form.valid" [swal]="confirm_swal" class="btn btn-primary float-md-right">Posting</button>
+            <button (click)="baru()" class="btn float-md-right">Baru</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #confirm_swal
+  title="Konfirmasi!"
+  text="Apa Anda Yakin untuk memposting transaksi?"
+  type="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="posting()">
+</swal>
+
+<app-anggota-modal [show]="show" (onCancle)="onCancle($event)" (onSelect)="fromModal($event)" #cariAnggotaModal>
+</app-anggota-modal>

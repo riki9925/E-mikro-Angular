@@ -1,0 +1,141 @@
+<app-anggota-modal [show]="show" (onCancle)="onCancle(item)" (onSelect)="fromModal($event)" #cariAnggotaModal>
+</app-anggota-modal>
+
+
+<form [formGroup]="form" class="form-block">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Rekening
+        </div>
+        <div class="card-block">
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>No. anggota</label>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" readonly formControlName="CIB" type="text" placeholder="Cari...">
+            </div>
+            <div class="col-md">
+              <button (click)="cariAnggota('CIB')" class="btn btn-icon float-sm-right">
+                <clr-icon shape="search"></clr-icon>
+              </button>
+            </div>
+          </div>
+          <div class="card" *ngIf="anggota">
+            <div class="card-header">
+              Informasi Anggota
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-md-12">
+                  <informasi-anggota [anggota]="anggota"></informasi-anggota>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6"  *ngIf="anggota">
+      <div class="card">
+        <div class="card-header">
+          Informasi Rekening
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>No. Simpanan</label>
+                <div class="select">
+                  <select formControlName="NOSIMP">
+                    <option>Pilih No Simpanan</option>
+                    <option *ngFor="let item of master" [ngValue]="item.NOSIMP">{{ item.NOSIMP + " - "+ item.KETERANGAN }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row" *ngIf="selectedMaster">
+            <div class="col-md-12">
+              <informasi-simpanan [simpanan]="selectedMaster"></informasi-simpanan>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="anggota && selectedMaster">
+      <div class="card">
+        <div class="card-block">
+          <div class="form-group">
+            <label>Jenis Rekening</label>
+            <div class="select form-control">
+              <select (change)="onChangeJenisRekening($event)">
+                <option value="" selected>Pilih Jenis Rekening</option>
+                <option value="1101">KAS</option>
+                <option value="1102">BANK</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Rekening Transaksi</label>
+            <div class="select form-control">
+              <select formControlName="ACC" [disabled]="!acc">
+                <option value="" selected>Pilih Rekening Transaksi</option>
+                <option *ngFor="let item of acc" [value]="item.ACC">{{ item.ACC + " - "+ item.KETERANGAN }}</option>
+              </select>
+              <div *ngIf="isRequired('ACC')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="anggota && selectedMaster">
+      <div class="card">
+        <div class="card-block">
+          <div class="form-group">
+            <label>Nominal Transaksi</label>
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4 style="margin: 1em;font-weight: bold;" class="float-sm-right">{{ form.get('NOMINAL').value | Currency }}</h4>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Keterangan Transaksi</label>
+            <textarea formControlName="KETERANGAN" class="form-control">
+                  </textarea>
+            <div *ngIf="isRequired('KETERANGAN')" class="label label-danger">
+              Required
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Berita Transaksi</label>
+            <textarea formControlName="BERITA" class="form-control">
+                  </textarea>
+            <div *ngIf="isRequired('BERITA')" class="label label-danger">
+              Required
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <button (click)="proses()" class="btn btn-primary float-md-right">Posting</button>
+              <button class="btn float-md-right">Baru</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

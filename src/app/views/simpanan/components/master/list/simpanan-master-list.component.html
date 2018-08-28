@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <form class="form-block">
+          <div class="form-group row">
+            <div class="col-md">
+              <label>Status</label>
+              <div class="select">
+                <select [ngModelOptions]="{standalone: true}" [(ngModel)]="status" (click)="refresh()">
+                  <option value="SEMUA" selected>SEMUA</option>
+                  <option value="0">TIDAK AKTIF</option>
+                  <option value="2">AKTIF</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Instansi</label>
+              <div class="select">
+                <select [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedInstansi" (click)="refresh()">
+                  <option value="SEMUA" selected>SEMUA</option>
+                  <option *ngFor="let item of instansi" [ngValue]="item">{{item.NAMA_INSTANSI}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Jenis</label>
+              <div class="select">
+                <select [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedJenis" (ngModelChange)="refresh()">
+                  <option value="SEMUA" selected>SEMUA</option>
+                  <option *ngFor="let item of jenis" [ngValue]="item"> {{item.KETERANGAN}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <clr-button-group>
+              <clr-button class="btn btn-primary">Buat Simpanan</clr-button>
+            </clr-button-group>
+            <clr-button-group class="float-md-right">
+              <clr-button (click)="exportPdf()" class="btn">Export PDF</clr-button>
+              <clr-button (click)="exportExcel()" class="btn">Export Excel</clr-button>
+              <clr-button (click)="exportCsv()" class="btn">Export CSV</clr-button>
+            </clr-button-group>
+          </div>
+          <div class="col-md-12">
+            <clr-datagrid>
+              <clr-dg-column [clrDgField]="'NOSIMP'">NO. SIMPANAN</clr-dg-column>
+              <clr-dg-column [clrDgField]="'CIB'">NO. Anggota</clr-dg-column>
+              <clr-dg-column [clrDgField]="'KETERANGAN'">JENIS</clr-dg-column>
+              <clr-dg-column [clrDgField]="'TGLBUKA'">TGL BUKA</clr-dg-column>
+              <clr-dg-column [clrDgField]="'TGLAKTIF'">TGL AKTIF</clr-dg-column>
+              <clr-dg-column [clrDgField]="'DEBET'">DEBET</clr-dg-column>
+              <clr-dg-column [clrDgField]="'KREDIT'">KREDIT</clr-dg-column>
+              <clr-dg-column [clrDgField]="'SALDO'">SALDO</clr-dg-column>
+
+              <clr-dg-row *clrDgItems="let item of master">
+                <clr-dg-cell>{{ item.NOSIMP }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.CIB }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.ACC + " - " + item.KETERANGAN }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.TGLBUKA | date }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.TGLAKTIF | date }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.DEBET }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.KREDIT }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.SALDO }}</clr-dg-cell>
+              </clr-dg-row>
+              <clr-dg-footer>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} Master Simpanan
+                <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+              </clr-dg-footer>
+            </clr-datagrid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

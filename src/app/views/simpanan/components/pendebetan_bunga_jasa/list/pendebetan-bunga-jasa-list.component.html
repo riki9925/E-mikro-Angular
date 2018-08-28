@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <form class="form-block">
+          <div class="form-group row">
+            <div class="col-md">
+              <label class="required">Jenis</label>
+              <div class="select from-control">
+                <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedJenis" (ngModelChange)="refresh()">
+                  <option value="" selected>Pilih Jenis Simpanan</option>
+                  <option *ngFor="let item of jenis" [ngValue]="item">{{item.ACC}} - {{item.KETERANGAN}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+            </div>
+            <div class="col-md">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <clr-datagrid>
+              <clr-dg-column [clrDgField]="'NOSIMP'">NO. SIMPANAN</clr-dg-column>
+              <clr-dg-column [clrDgField]="'CIB'">NO. Anggota</clr-dg-column>
+              <clr-dg-column [clrDgField]="'DEBET'">DEBET</clr-dg-column>
+              <clr-dg-column [clrDgField]="'KREDIT'">KREDIT</clr-dg-column>
+              <clr-dg-column [clrDgField]="'SALDO'">SALDO</clr-dg-column>
+              <clr-dg-column>NOMINAL</clr-dg-column>
+
+              <clr-dg-row *clrDgItems="let item of master">
+                <clr-dg-cell>{{ item.NOSIMP }}</clr-dg-cell>
+                <clr-dg-cell>{{ item.CIB }}</clr-dg-cell>
+                <clr-dg-cell style="text-align: right;">{{ item.DEBET | Currency }}</clr-dg-cell>
+                <clr-dg-cell style="text-align: right;">{{ item.KREDIT | Currency }}</clr-dg-cell>
+                <clr-dg-cell style="text-align: right;">{{ item.SALDO | Currency }}</clr-dg-cell>
+                <clr-dg-cell style="text-align: right;">{{ nominal(item) | Currency }}</clr-dg-cell>
+
+              </clr-dg-row>
+              <clr-dg-footer>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} Master Simpanan
+                <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+              </clr-dg-footer>
+            </clr-datagrid>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn float-md-right">Batal</button>
+            <button [disabled]="master.length <= 0" class="btn btn-primary float-md-right" [swal]="confirm_swal">Proses</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #confirm_swal
+  title="Konfirmasi!"
+  text="Apa Anda Yakin untuk memposting transaksi?"
+  type="question"
+  showLoaderOnConfirm="true"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="proses()">
+</swal>

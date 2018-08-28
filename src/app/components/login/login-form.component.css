@@ -1,0 +1,8 @@
+.grid {
+  margin-top: 10%;
+}
+
+.column {
+  align-self: center;
+  max-width: 450px;
+}

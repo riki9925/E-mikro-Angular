@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <a (click)="create()" class="btn btn-primary">Buat Simpanan Baru</a>
+      </div>
+      <div class="card-block">
+        <clr-datagrid>
+          <clr-dg-column [clrDgField]="'ACC'">JENIS SIMPANAN</clr-dg-column>
+          <clr-dg-column [clrDgField]="'KETERANGAN'">KETERANGAN</clr-dg-column>
+          <clr-dg-column>BUNGA</clr-dg-column>
+          <clr-dg-column>PAJAK</clr-dg-column>
+          <clr-dg-column>ADMIN</clr-dg-column>
+          <clr-dg-column>POT</clr-dg-column>
+          <clr-dg-column>Action</clr-dg-column>
+          <clr-dg-row *clrDgItems="let item of jenis">
+            <clr-dg-cell>{{item.ACC}}</clr-dg-cell>
+            <clr-dg-cell>{{item.KETERANGAN}}</clr-dg-cell>
+            <clr-dg-cell>{{item.BGA}}</clr-dg-cell>
+            <clr-dg-cell>{{item.PJK}}</clr-dg-cell>
+            <clr-dg-cell>{{item.ADM}}</clr-dg-cell>
+            <clr-dg-cell>{{item.POT}}</clr-dg-cell>
+            <clr-dg-cell>
+              <a (click)="edit(item)" class="btn btn-primary">Edit</a>
+              <a (click)="delete(item)" class="btn btn-danger">Delete</a>
+            </clr-dg-cell>
+          </clr-dg-row>
+          <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} Master Simpanan
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+          </clr-dg-footer>
+        </clr-datagrid>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

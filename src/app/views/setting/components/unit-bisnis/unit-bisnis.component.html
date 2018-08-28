@@ -1,0 +1,13 @@
+<app-unit-bisnis-form *ngIf="selected$ | async"
+                      [loading]="loading$ | async"
+                      [unit]="selected$ | async"
+                      (save)="save($event)"
+                      (cancle)="cancle()">
+</app-unit-bisnis-form>
+<app-unit-bisnis-list *ngIf="!(selected$ | async)"
+                      [loading]="loading$ | async"
+                      [jenis]="jenis$ | async"
+                      [unit]="unit$ | async"
+                      (update)="update($event)"
+>
+</app-unit-bisnis-list>

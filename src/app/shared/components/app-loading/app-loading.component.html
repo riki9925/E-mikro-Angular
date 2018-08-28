@@ -1,0 +1,17 @@
+<div class="alert alert-app-level alert-info" *ngIf="payload">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-icon-wrapper">
+        <clr-icon class="alert-icon" shape="nvme"></clr-icon>
+      </div>
+      <div class="alert-text">
+        Mohon tunggu sebentar
+      </div>
+      <div *ngIf="payload.action" class="alert-actions">
+        <button class="btn alert-action">Detail</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="backdrop" style="position: fixed;width: 100%;height: 100%;
+background: rgba(0,0,0,0.7);" *ngIf="payload"></div>

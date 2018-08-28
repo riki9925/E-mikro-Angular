@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Update Shu (Sisa Hasil Usaha)
+      </div>
+      <div class="card-block">
+        <form [formGroup]="shuForm" class="form-block" novalidate>
+          <div class="form-group">
+            <label>Modal</label>
+            <input formControlName="modal" placeholder="Modal" name="modal" type="number"/>
+          </div>
+          <div class="form-group">
+            <label>Pengurus</label>
+            <input formControlName="pengurus" placeholder="Pengurus" name="pengurus" type="number"/>
+          </div>
+          <div class="form-group">
+            <label>Anggota</label>
+            <input formControlName="anggota" placeholder="anggota" name="anggota" type="number"/>
+          </div>
+          <div class="form-group">
+            <label>Karyawan</label>
+            <input formControlName="Karyawan" placeholder="karyawan" name="karyawan" type="number"/>
+          </div>
+
+        </form>
+      </div>
+      <div class="card-footer">
+        <button (click)="update()" class="btn btn-primary pull-right">Simpan</button>
+        <button (click)="back()" class="btn btn-danger pull-right">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>

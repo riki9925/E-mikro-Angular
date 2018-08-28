@@ -1,0 +1,32 @@
+<table class="table-noborder" width="100%" cellpadding="5">
+  <tr>
+    <td style="text-align: center;font-weight: bold" colspan="4">
+      Informasi Anggota
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <hr>
+    </td>
+  </tr>
+  <tr>
+    <td>NO. Anggota</td>
+    <td><b style="font-size: 1.5em">{{ anggota.CIB }}</b></td>
+  </tr>
+  <tr>
+    <td>Nama</td>
+    <td><b>{{ anggota.NAMA }}</b></td>
+  </tr>
+  <tr>
+    <td>Instansi</td>
+    <td>{{ anggota.KI }} - {{ !(instansi$ | async) ? '' : (instansi$ | async).NAMA_INSTANSI }}</td>
+  </tr>
+  <tr>
+    <td>ID Pengenal</td>
+    <td>{{ anggota.ID }} - {{ anggota.NO_ID }}</td>
+  </tr>
+  <tr>
+    <td>Alamat</td>
+    <td>{{ anggota.ALAMAT }}</td>
+  </tr>
+</table>

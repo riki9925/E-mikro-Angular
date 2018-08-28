@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+
+.caption-number {
+  margin-top: 0;
+}
+
+.caption-number-pull-right {
+  margin-top: 0;
+  display: block;
+  text-align: right;
+}
+
+.swal2-popup {
+  font-size: 1em !important;
+}
+
+.right-row {
+  text-align: right !important;
+}
+
+.input-number {
+  padding-right: 20px !important;
+  text-align: right !important;
+  font-family: Verdana,sans-serif !important;
+  font-size: 2em !important;
+  font-weight: bold !important;
+}
+
+.loading-mask {
+  background: #333;
+
+  /* Ensures that the transition only runs in one direction */
+  -webkit-transition: background-color 0;
+  transition: background-color 0;
+}
+
+
+

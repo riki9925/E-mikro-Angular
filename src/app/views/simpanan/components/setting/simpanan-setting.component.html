@@ -1,0 +1,16 @@
+<app-simpanan-setting-form
+  *ngIf="selectedJenis$ | async"
+  [loading]="loading$ | async"
+  [account]="account$ | async"
+  [jenis]="selectedJenis$ | async"
+  (update)="onFormUpdate($event)"
+  (simpan)="onFormCreate($event)"
+  (batal)="onFormBatal()">
+</app-simpanan-setting-form>
+<app-simpanan-setting-list
+  *ngIf="!(selectedJenis$ | async)"
+  [jenis]="jenis$ | async"
+  (edit)="onListEdit($event)"
+  (create)="onListCreate($event)"
+  (delete)="onListDelete($event)">
+</app-simpanan-setting-list>

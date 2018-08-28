@@ -1,0 +1,22 @@
+<clr-main-container>
+  <app-loading></app-loading>
+  <app-alert></app-alert>
+  <app-header></app-header>
+  <div class="content-container">
+    <div class="content-area">
+      <app-breadcrumbs></app-breadcrumbs>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <clr-vertical-nav [clr-nav-level]="2" [clrVerticalNavCollapsible]="true">
+      <a clrVerticalNavLink *ngFor="let item of navigation"
+         routerLink="{{item.path}}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="folder" ></clr-icon>
+        {{item.title}}
+      </a>
+    </clr-vertical-nav>
+  </div>
+</clr-main-container>
+

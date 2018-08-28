@@ -1,0 +1,34 @@
+<app-account-form
+  *ngIf="selectedAccount$ | async"
+  [account]="selectedAccount$ | async"
+  [accounts]="account$ | async"
+  [bukubesar]="bukubesar$ | async"
+  [loading]="loading$ | async"
+  [selectedBukubesar]="selectedBukubesar$ | async"
+  (simpan)="createAccount($event)"
+  (update)="updateAccount($event)"
+  (batal)="batal()"
+>
+</app-account-form>
+
+<app-account-list
+  *ngIf="!(selectedAccount$ | async)"
+  [unit]="unit$ | async"
+  [jenis]="jenis$ | async"
+  [kelompok]="kelompok$ | async"
+  [bukubesar]="bukubesar$ | async"
+  [account]="account$ | async"
+  [loading]="loading$ | async"
+  (onJenisChange)="onJenisChange($event)"
+  (onKelompokChange)="onKelompokChange($event)"
+  (onBukubesarChange)="onBukubesarChange($event)"
+  (onUnitBisnisChange)="onUnitBisnisChange($event)"
+  (onEdit)="onEdit($event)"
+  (onDelete)="onDelete($event)"
+  (onCreate)="onCreate($event)"
+>
+</app-account-list>
+
+
+<!--<app-modal #modal (action)="approve($event)">-->
+<!--</app-modal>-->

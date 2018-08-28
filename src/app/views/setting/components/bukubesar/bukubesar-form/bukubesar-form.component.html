@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div *ngIf="bukubesar.CIF">
+          <h2>Update Bukubesar</h2>
+        </div>
+        <div *ngIf="!bukubesar.CIF">
+          <h4>Create Bukubesar</h4>
+        </div>
+      </div>
+      <div class="card-block">
+        <form [formGroup]="bukubesarForm" class="form-block" novalidate>
+          <div class="form-group row">
+            <div class="col-md">
+              <label>Jenis</label>
+              <div class="select form-control">
+                <select formControlName="JENIS" [disabled]="bukubesar.CIF" (change)="onChangeJenis()">
+                  <option value="0" disabled selected>Select Jenis</option>
+                  <option *ngFor="let item of jenis" [value]="item.ACCJENIS"> {{item.JENIS}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <label>Jenis</label>
+              <div class="select form-control">
+                <select formControlName="KELOMPOK" [disabled]="bukubesar.CIF" (change)="onChangeKelompok()">
+                  <option value="0" disabled selected>Select Kelompok</option>
+                  <option *ngFor="let item of kelompok" [value]="item.ACCKEL"> {{item.KELOMPOK}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md">
+              <label class="required">Urut</label>
+              <input class="form-control" formControlName="URUT" [disabled]="bukubesar.CIF" placeholder="No Urut Account" name="name"
+                     type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="required">Nama</label>
+            <input class="form-control" formControlName="BUKUBESAR" placeholder="Nama Bukubesar" name="username" type="text"/>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="required">Kategori</label>
+                <input class="form-control" formControlName="KATEGORI" placeholder="No Urut Account" name="name" type="text">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="required">Golongan</label>
+                <input class="form-control" formControlName="GOLONGAN" placeholder="No Urut Account" name="name" type="text">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="required">Resiko</label>
+                <input class="form-control" formControlName="RESIKO" placeholder="Resiko" type="text">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-12">
+            <button *ngIf="!bukubesar.CIF" (click)="simpan()" class="btn btn-primary float-md-right">Simpan</button>
+            <button *ngIf="bukubesar.CIF" (click)="update()" class="btn btn-primary float-md-right">Update</button>
+            <button (click)="batal()" class="btn float-md-right">Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

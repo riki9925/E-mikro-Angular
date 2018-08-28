@@ -1,0 +1,246 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div *ngIf="anggota.CIB">
+          <h3>Update Anggota</h3>
+        </div>
+        <div *ngIf="!anggota.CIB">
+          <h3>Create Anggota</h3>
+        </div>
+      </div>
+      <div class="card-block">
+        <form [formGroup]="anggotaForm" novalidate>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">NOKARTU</label>
+              <input style="width: 100%" formControlName="NOKARTU" placeholder="Nomor Kartu" name="username" type="text"/>
+              <div *ngIf="isRequired('NOKARTU')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">NOGAJI</label>
+              <input style="width: 100%" formControlName="NOGAJI" placeholder="Nomor Gaji" name="username" type="text"/>
+              <div *ngIf="isRequired('NOGAJI')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">NIP</label>
+              <input style="width: 100%" formControlName="NIP" placeholder="NIP" name="username" type="text"/>
+              <div *ngIf="isRequired('NIP')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <label class="required">Nama</label>
+              <input style="width: 100%" formControlName="NAMA" placeholder="Nama Lengkap" name="name" type="text">
+              <div *ngIf="isRequired('NAMA')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="required">Panggilan</label>
+              <input style="width: 100%" formControlName="PANGGILAN" placeholder="No telefon" name="name" type="text">
+              <div *ngIf="isRequired('PANGGILAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">Instansi</label>
+              <div class="select">
+                <select formControlName="KI">
+                  <option value="">PILIH INSTANSI</option>
+                  <option *ngFor="let item of instansi" [value]="item.KI">{{ item.NAMA_INSTANSI }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('KI')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">TEMPAT LAHIR</label>
+              <input style="width: 100%" formControlName="TMP_LAHIR" placeholder="No handphone" name="name" type="text">
+              <div *ngIf="isRequired('TMP_LAHIR')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">TANGGAL LAHIR</label>
+              <input style="width: 100%" formControlName="TGL_LAHIR" placeholder="Tgl Lahir" name="name" type="date">
+              <div *ngIf="isRequired('TGL_LAHIR')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">Jenis Pengenal</label>
+              <div class="select">
+                <select formControlName="ID" name="name" type="text">
+                  <option value="" selected>PILIH JENIS PENGENAL</option>
+                  <option *ngFor="let item of identitas" [value]="item.IDENTITAS">{{ item.IDENTITAS }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('ID')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">Nomor Pengenal</label>
+              <input style="width: 100%" formControlName="NO_ID" placeholder="Nomor Pengenal" name="name" type="text">
+              <div *ngIf="isRequired('NO_ID')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">Berlaku sampai</label>
+              <input style="width: 100%" formControlName="TGLEXPIRED" placeholder="Tanggal Expired" name="name" type="text">
+              <div *ngIf="isRequired('TGLEXPIRED')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">AGAMA</label>
+              <div class="select">
+                <select formControlName="AGAMA" placeholder="Nama Bendahara" name="name" type="text">
+                  <option value="" selected>PILIH JENIS PENGENAL</option>
+                  <option *ngFor="let item of agama" [value]="item.AGAMA">{{ item.AGAMA }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('AGAMA')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">PENDIDIKAN</label>
+              <div class="select">
+                <select formControlName="PENDIDIKAN" name="name" type="text">
+                  <option value="" selected>PILIH PENDIDIKAN</option>
+                  <option *ngFor="let item of pendidikan" [value]="item.PENDIDIKAN">{{ item.PENDIDIKAN }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('PENDIDIKAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">PEKERJAAN</label>
+              <div class="select">
+                <select formControlName="PEKERJAAN" name="name" type="text">
+                  <option value="" selected>PILIH PEKERJAAN</option>
+                  <option *ngFor="let item of pekerjaan" [value]="item.PEKERJAAN">{{ item.PEKERJAAN }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('PEKERJAAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">JABATAN</label>
+              <div class="select">
+                <select formControlName="JABATAN" name="name" type="text">
+                  <option value="" selected>PILIH JABATAN</option>
+                  <option *ngFor="let item of jabatan" [value]="item.JABATAN">{{ item.JABATAN }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('JABATAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">GOLONGAN</label>
+              <div class="select">
+                <select formControlName="GOLONGAN" placeholder="Telepon Bendahara" name="name"
+                        type="text">
+                  <option value="" selected>PILIH GOLONGAN</option>
+                  <option *ngFor="let item of golongan" [value]="item.GOLONGAN">{{ item.GOLONGAN }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('GOLONGAN')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <div class="form-grup">
+            <label class="required">ALAMAT</label>
+            <textarea class="form-control" formControlName="ALAMAT" rows="2" placeholder="Alamat" name="name" type="text"></textarea>
+            <div *ngIf="isRequired('ALAMAT')" class="label label-danger">
+              Required
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">TELEPON</label>
+              <input style="width: 100%" formControlName="TELEPON" placeholder="Nama Bendahara" name="name" type="text">
+              <div *ngIf="isRequired('TELEPON')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">HANDPHONE</label>
+              <input style="width: 100%" formControlName="HANDPHONE" placeholder="Telepon Bendahara" name="name" type="text">
+              <div *ngIf="isRequired('HANDPHONE')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">E_MAIL</label>
+              <input style="width: 100%" formControlName="E_MAIL" placeholder="Email Bendahara" name="name" type="text">
+              <div *ngIf="isRequired('E_MAIL')" class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+          <h2>Data Ahli waris</h2>
+          <div class="form-group row">
+            <div class="col-md-4">
+              <label class="required">NAMAAHLIWARIS</label>
+              <input style="width: 100%" formControlName="NAMAAHLIWARIS" placeholder="Nama Ahli Waris" name="name" type="text">
+              <div *ngIf="isRequired('NAMAAHLIWARIS')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">HUBKEL</label>
+              <div class="select">
+                <select formControlName="HUBKEL" class="ui dropdown" name="name"
+                        type="text">
+                  <option value="" selected>PILIH HUBUNGAN KELUARGA</option>
+                  <option *ngFor="let item of hub_keluarga" [value]="item.HUBKELUARGA">{{ item.HUBKELUARGA }}</option>
+                </select>
+              </div>
+              <div *ngIf="isRequired('HUBKEL')" class="label label-danger">
+                Required
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="required">ALAMATAHLIWARIS</label>
+              <input style="width: 100%" formControlName="ALAMATAHLIWARIS" placeholder="Alamat Ahli waris" name="name" type="text">
+              <div *ngIf="isRequired('ALAMATAHLIWARIS')"
+                   class="label label-danger">
+                Required
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div *ngIf="!anggota.CIB" (click)="simpan()" class="btn btn-primary">Simpan</div>
+          <div *ngIf="anggota.CIB" (click)="update()" class="btn btn-primary">Update</div>
+          <div (click)="batal()" class="btn">Batal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
